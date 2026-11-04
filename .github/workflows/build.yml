@@ -10,12 +10,13 @@ jobs:
 
       - name: Build kext
         run: |
+          sed -i 's/\r$//' build.sh
           chmod +x build.sh
-          ./build.sh
+          WORK="$GITHUB_WORKSPACE/wex-patch-build" ./build.sh
 
       - name: Upload kext
         uses: actions/upload-artifact@v4
         with:
           name: WhateverXe-0.7.0-6bank
-          path: $HOME/wex-patch-build/src/build/WhateverXe.kext
+          path: wex-patch-build/src/build/WhateverXe.kext
           if-no-files-found: error
